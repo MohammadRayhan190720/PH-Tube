@@ -1,3 +1,18 @@
+
+//getTimeString
+ const getTimeString = (time) => {
+  const days = parseInt(time / 86400)
+  let remainingSeconds = time % 86400;
+   const hours = parseInt(time / 3600);
+    remainingSeconds = time % 3600;
+   const minutes = parseInt(remainingSeconds / 60);
+   remainingSeconds = time % 60;
+
+   return `${days} days ${hours} hours ${minutes} minutes ${remainingSeconds} seconds ago`;
+ };
+
+
+
 //load catagories
 const loadCatagories = () =>{
   fetch("https://openapi.programming-hero.com/api/phero-tube/categories")
@@ -70,7 +85,13 @@ const displayVideos = (videos) =>{
       src=${video.thumbnail}
       alt="Shoes" class = "h-full w-full object-cover" />
 
-      ${video.others.posted_date?.length === 0 ? "" :`<span class = "absolute right-2 bottom-2 bg-black rounded p-1 text-white "> ${video.others.posted_date}</span>`}
+      ${
+        video.others.posted_date?.length === 0
+          ? ""
+          : `<span class = "absolute right-2 bottom-2 bg-black rounded p-1 text-white "> ${getTimeString(
+              video.others.posted_date
+            )}</span>`
+      }
       
 
     </figure>
