@@ -32,12 +32,13 @@ categories.forEach((item) =>{
   console.log(item)
 
   //creat a button
-  const button = document.createElement('button');
-  button.classList = 'btn';
-  button.innerText = item.category;
+  const buttonContainer = document.createElement('div');
+ buttonContainer.innerHTML = `
+ <button class = "btn"> ${item.category}</button>
+ `;
 
   //add button
-  categoryContainer.appendChild(button);
+  categoryContainer.appendChild(buttonContainer);
 })
 }
 
@@ -88,7 +89,7 @@ const displayVideos = (videos) =>{
       ${
         video.others.posted_date?.length === 0
           ? ""
-          : `<span class = "absolute right-2 bottom-2 bg-black rounded p-1 text-white "> ${getTimeString(
+          : `<span class = "absolute right-2 bottom-2 text-sm bg-black rounded p-1 text-white "> ${getTimeString(
               video.others.posted_date
             )}</span>`
       }
