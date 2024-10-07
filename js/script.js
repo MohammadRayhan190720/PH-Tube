@@ -34,7 +34,7 @@ categories.forEach((item) =>{
   //creat a button
   const buttonContainer = document.createElement('div');
  buttonContainer.innerHTML = `
- <button class = "btn"> ${item.category}</button>
+ <button onclick = "loadCategoryVideos(${item.category_id})" class = "btn"> ${item.category}</button>
  `;
 
   //add button
@@ -74,6 +74,21 @@ const loadVideos = () =>{
 //display videos
 const displayVideos = (videos) =>{
   const videosContainer = document.getElementById("videos");
+  videosContainer.innerHTML = '' ;
+
+  if (videos.length === 0){
+    videosContainer.classList.remove("grid") ;
+    videosContainer.innerHTML = `
+    <div class = "min-h-[300px] flex flex-col justify-center items-center">
+    <img src = '../images/Icon.png'/>
+    <h2 class = "text-2xl text-center">NO CONTENT HARE</h2>
+    </div>
+    `
+  }else{
+        videosContainer.classList.add("grid");
+
+
+  }
   
   videos.forEach((video) =>{
     console.log(video)
@@ -125,6 +140,15 @@ const displayVideos = (videos) =>{
 
 
   })
+}
+
+//loadCategoryVideos()
+const loadCategoryVideos = (id) =>{
+  // alert(id)
+  fetch(`https://openapi.programming-hero.com/api/phero-tube/category/${id}`)
+  .then(res => res.json())
+  .then(data => displayVideos(data.category))
+  .catch(err => console.error(err))
 }
   
 
