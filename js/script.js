@@ -25,6 +25,27 @@ categories.forEach((item) =>{
   categoryContainer.appendChild(button);
 })
 }
+
+//load videos
+const loadVideos = () =>{
+  fetch("https://openapi.programming-hero.com/api/phero-tube/videos")
+  .then((res) => res.json())
+  .then((data) => displayVideos(data.videos))
+  .catch((err) => console.error(err))
+
+}
+
+//display videos
+const displayVideos = (videos) =>{
+  const videosContainer = document.getElementById("videos");
+  
+  videos.forEach((video) =>{
+    console.log(video)
+    
+
+  })
+}
   
 
 loadCatagories();
+loadVideos();
