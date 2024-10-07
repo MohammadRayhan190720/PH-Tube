@@ -9,9 +9,22 @@ const loadCatagories = () =>{
 
 //displayCatagories
 
-const displayCatagories = (data) =>{
-  console.log(data)
+const displayCatagories = (categories) =>{
 
+const categoryContainer = document.getElementById("category-container");
+
+categories.forEach((item) =>{
+  console.log(item)
+
+  //creat a button
+  const button = document.createElement('button');
+  button.classList = 'btn';
+  button.innerText = item.category;
+
+  //add button
+  categoryContainer.appendChild(button);
+})
 }
+  
 
 loadCatagories();
