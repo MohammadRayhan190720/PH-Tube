@@ -75,8 +75,8 @@ const cardDemo = {
 };
 
 //load videos
-const loadVideos = () =>{
-  fetch("https://openapi.programming-hero.com/api/phero-tube/videos")
+const loadVideos = (searchText = " ") =>{
+  fetch(`https://openapi.programming-hero.com/api/phero-tube/videos?title=${searchText}`)
   .then((res) => res.json())
   .then((data) => displayVideos(data.videos))
   .catch((err) => console.error(err))
@@ -182,10 +182,19 @@ const loadVideosDatails = async (videoId) =>{
 
 const displayVideosDatails = (video) =>{
   const videoDatails = document.getElementById("modal-content")
+  videoDatails.innerHTML = `
+  <img src = '${video.thumbnail}'/>
+  <p>${video.description}</p>
+  `
 
   document.getElementById("my_modal_5").showModal();
 
 }
+
+//search
+document.getElementById("search-input").addEventListener("keyup", (e)=>{
+  loadVideos(e.target.value)
+})
   
 
 loadCatagories();

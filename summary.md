@@ -1,0 +1,11 @@
+- load and Display data inatially
+- onclick load and display data
+- complex object accessing
+- toggle active class functionality
+- searce functionality
+- load and display single data
+- display data in a modal 
+- load and display single category data
+- conditional rendering if array dont have any data
+- conditional rendering if array dont have any data
+- conditional rendering if array length is ZERO
