@@ -181,7 +181,9 @@ const loadVideosDatails = async (videoId) =>{
 }
 
 const displayVideosDatails = (video) =>{
-  console.log(video);
+  const videoDatails = document.getElementById("modal-content")
+
+  document.getElementById("my_modal_5").showModal();
 
 }
   
