@@ -11,6 +11,18 @@
    return `${days} days ${hours} hours ${minutes} minutes ${remainingSeconds} seconds ago`;
  };
 
+ //btn-functionally
+
+ const removeActiveClass = () =>{
+  const buttons = document.getElementsByClassName("category-btn");
+  console.log(buttons);
+  for (const btn of buttons) {
+    btn.classList.remove("active");
+    
+  }
+
+ }
+
 
 
 //load catagories
@@ -34,7 +46,7 @@ categories.forEach((item) =>{
   //creat a button
   const buttonContainer = document.createElement('div');
  buttonContainer.innerHTML = `
- <button onclick = "loadCategoryVideos(${item.category_id})" class = "btn"> ${item.category}</button>
+ <button id = "btn-${item.category_id}" onclick = "loadCategoryVideos(${item.category_id})" class = "btn category-btn"> ${item.category}</button>
  `;
 
   //add button
@@ -85,7 +97,7 @@ const displayVideos = (videos) =>{
     </div>
     `
   }else{
-        videosContainer.classList.add("grid");
+   videosContainer.classList.add("grid");
 
 
   }
@@ -129,6 +141,7 @@ const displayVideos = (videos) =>{
 
     </div>
     <P class = "text-gray-400">${video.others.views} Views</P>
+    <button onclick ="loadVideosDatails('${video.video_id}')" class = "btn btn-sm bg-lime-400">Datails</button>
     
     
     </div>
@@ -147,8 +160,29 @@ const loadCategoryVideos = (id) =>{
   // alert(id)
   fetch(`https://openapi.programming-hero.com/api/phero-tube/category/${id}`)
   .then(res => res.json())
-  .then(data => displayVideos(data.category))
+  .then(data =>{
+    //sobaike active class remove koraw
+    removeActiveClass();
+
+    // id er class k active koraw
+    const activeBtn = document.getElementById(`btn-${id}`);
+    activeBtn.classList.add('active');
+    displayVideos(data.category);
+  } )
   .catch(err => console.error(err))
+}
+
+const loadVideosDatails = async (videoId) =>{
+  // console.log(videoId);
+  const url =`https://openapi.programming-hero.com/api/phero-tube/video/${videoId}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  displayVideosDatails(data.video)
+}
+
+const displayVideosDatails = (video) =>{
+  console.log(video);
+
 }
   
 
